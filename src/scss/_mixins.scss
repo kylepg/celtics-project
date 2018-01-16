@@ -1,0 +1,10 @@
+@import 'mixins/video';
+@import 'mixins/media-queries';
+
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
