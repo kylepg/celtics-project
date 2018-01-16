@@ -3,8 +3,18 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     //
-    // ─── WATCH ──────────────────────────────────────────────────────
+    // ─── SET VARIABLES ───────────────────────────────────────────────
     //
+
+    projectPath: '/Users/kyle/Dropbox/CELTICS/projects/project-name',
+    ftpPathCSS: 'ftp://cdnftp.turner.com/css/project-name.css',
+    ftpPathJS: 'ftp://cdnftp.turner.com/js/project-name.js',
+    ftpUser: 'nbcelticsa',
+    ftpPw: '',
+
+    //
+    // ─── WATCH ──────────────────────────────────────────────────────
+    // Defines tasks to be run when files are changed.
 
     watch: {
       html: {
@@ -22,8 +32,8 @@ module.exports = function(grunt) {
     },
 
     //
-    // ─── SASS (COMPILE + MINIFY) ─────────────────────────────────────
-    //
+    // ─── SASS ───────────────────────────────────────────────────────
+    // Compiles and minifies scss files. Also generates a sourcemap.
 
     sass: {
       dist: {
@@ -48,8 +58,8 @@ module.exports = function(grunt) {
     },
 
     //
-    // ─── MINIFY JAVASCRIPT ───────────────────────────────────────────
-    //
+    // ─── UGLIFY ───────────────────────────────────────────
+    // Minifies javascript.
 
     uglify: {
       dist: {
@@ -61,7 +71,8 @@ module.exports = function(grunt) {
 
     //
     // ─── IMPORT ──────────────────────────────────────────────────────
-    //
+    // Copies the html file to dist folder. Can also pull in external
+    // css/js file contents using '@import path/to/file'.
 
     import: {
       options: {
@@ -69,15 +80,15 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          'dist/js/project-name.js': 'src/js/project-name.js',
           'dist/index.html': 'src/project-name.html'
         }
       }
     },
 
     //
-    // ─── BROWSERIFY (BABEL) ────────────────────────────────────────────
-    //
+    // ─── BROWSERIFY ────────────────────────────────────────────
+    // Allows use of node's require method to bundle node-modules.
+    // Compiles ES6+ to ES5 using Babel.
 
     browserify: {
       dev: {
@@ -91,8 +102,8 @@ module.exports = function(grunt) {
     },
 
     //
-    // ─── NOTIFY (OPTIONAL) ───────────────────────────────────────────────
-    //
+    // ─── NOTIFY ───────────────────────────────────────────
+    // Notifies you when all tasks have completed.
 
     notify: {
       done: {
@@ -105,23 +116,25 @@ module.exports = function(grunt) {
     },
 
     //
-    // ─── EXECUTE (UPLOAD VIA CYBERDUCK FTP) ───────────────────────────────
+    // ─── EXECUTE ────────────────────────────────────────────────────
+    // Executes command line script. Uploads css/js development
+    // files to ftp via cyberduck.
     //
+    // Homebrew installation: brew install duck
 
     exec: {
       uploadCSS: {
-        command:
-          "duck --upload ftp://cdnftp.turner.com/css/project-name.css /Users/kyle/Dropbox/CELTICS/projects/project-name/dist/css/project-name.css -existing overwrite --username 'nbcelticsa' --password '***' -y"
+        command: "duck --upload <%= ftpPath %> <%= projectPath %>/dist/css/project-name.css -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y"
       },
       uploadJS: {
-        command:
-          "duck --upload ftp://cdnftp.turner.com/js/project-name.js /Users/kyle/Dropbox/CELTICS/projects/project-name/dist/js/project-name.js -existing overwrite --username 'nbcelticsa' --password '***' -y"
+        command: "duck --upload <%= ftpPath %> <%= projectPath %>/dist/js/project-name.js -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y"
       }
     },
 
     //
-    // ─── CACHE BUST ──────────────────────────────────────────────────
-    //
+    // ─── CACHE BREAKER ──────────────────────────────────────────────────
+    // Cache busts external css/js by appending a timestamp query string
+    // to html tag links.
 
     cachebreaker: {
       dev: {
@@ -137,9 +150,9 @@ module.exports = function(grunt) {
 
   //
   // ─── LOAD TASKS ────────────────────────────────────────────────────────────────────
-  //
+  // Load grunt tasks from node_modules.
 
-  require('grunt-log-headers')(grunt);
+  require('grunt-log-headers')(grunt); // OPTIONAL: Hides grunt task from logging in terminal.
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-import');
   grunt.loadNpmTasks('grunt-contrib-sass');
