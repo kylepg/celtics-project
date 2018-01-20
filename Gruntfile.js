@@ -6,11 +6,11 @@ module.exports = function(grunt) {
     // ─── SET VARIABLES ───────────────────────────────────────────────
     //
 
-    projectPath: '[dirPath]',
-    ftpPathCSS: '[ftpPathCSS]',
-    ftpPathJS: '[ftpPathJS]',
-    ftpUser: '[ftpUser]',
-    ftpPw: '[ftpPw]',
+    projectPath: 'replacedirPath',
+    ftpPathCSS: 'replaceftpPathCSS',
+    ftpPathJS: 'replaceftpPathJS',
+    ftpUser: 'replaceftpUser',
+    ftpPw: 'replaceftpPw',
 
     //
     // ─── WATCH ──────────────────────────────────────────────────────
