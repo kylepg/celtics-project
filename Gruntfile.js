@@ -124,10 +124,10 @@ module.exports = function(grunt) {
 
     exec: {
       uploadCSS: {
-        command: "duck --upload <%= ftpPath %> <%= projectPath %>/dist/css/project-name.css -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y"
+        command: "duck --upload <%= ftpPathCSS %> <%= projectPath %>/dist/css/project-name.css -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y"
       },
       uploadJS: {
-        command: "duck --upload <%= ftpPath %> <%= projectPath %>/dist/js/project-name.js -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y"
+        command: "duck --upload <%= ftpPathJS %> <%= projectPath %>/dist/js/project-name.js -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y"
       }
     },
 
