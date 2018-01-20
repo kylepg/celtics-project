@@ -6,11 +6,11 @@ module.exports = function(grunt) {
     // ─── SET VARIABLES ───────────────────────────────────────────────
     //
 
-    projectPath: '/Users/kyle/Dropbox/CELTICS/projects/project-name',
-    ftpPathCSS: 'ftp://cdnftp.turner.com/css/project-name.css',
-    ftpPathJS: 'ftp://cdnftp.turner.com/js/project-name.js',
-    ftpUser: 'nbcelticsa',
-    ftpPw: '',
+    projectPath: '(dirPath)',
+    ftpPathCSS: '(ftpPathCSS)',
+    ftpPathJS: '(ftpPathJS)',
+    ftpUser: '(ftpUser)',
+    ftpPw: '(ftpPw)',
 
     //
     // ─── WATCH ──────────────────────────────────────────────────────
