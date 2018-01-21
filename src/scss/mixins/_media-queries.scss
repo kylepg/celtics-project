@@ -1,80 +1,105 @@
-@mixin centered {
+@mixin centered($horizontal: true, $vertical: true) {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
+  @if ($horizontal and $vertical) {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  } @else if ($horizontal) {
+    left: 50%;
+    transform: translate(-50%, 0);
+  } @else if ($vertical) {
+    top: 50%;
+    transform: translate(0, -50%);
+  }
 }
 
-@mixin centered-rel {
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
+@mixin centered-relative($horizontal: true, $vertical: true) {
+  position: absolute;
+  @if ($horizontal and $vertical) {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  } @else if ($horizontal) {
+    left: 50%;
+    transform: translate(-50%, 0);
+  } @else if ($vertical) {
+    top: 50%;
+    transform: translate(0, -50%);
+  }
 }
-
 @mixin bootstrap($min: 0, $max: 0) {
   $type: type-of($min);
-  
+
   @if $type == string {
-    @if $min == xs { 
-      @media (max-width: 767px) { @content; }    
-    }
-    
-    @else if $min == sm {
-      @media (min-width: 768px) { @content; } 
-    }
-    
-    @else if $min == md {
-      @media (min-width: 992px) { @content; }
-    }
-    
-    @else if $min == lg {
-      @media (min-width: 1200px) { @content; }   
-    }
-  
-    @else {
+    @if $min == xs {
+      @media (max-width: 767px) {
+        @content;
+      }
+    } @else if $min == sm {
+      @media (min-width: 768px) {
+        @content;
+      }
+    } @else if $min == md {
+      @media (min-width: 992px) {
+        @content;
+      }
+    } @else if $min == lg {
+      @media (min-width: 1200px) {
+        @content;
+      }
+    } @else {
       @warn "The breakpoint mixin supports the following attributes: xs, sm, md, lg";
     }
-  }
-  @else if $type == number {
-    $query: "all" !default;
-    @if      $min != 0 and $max != 0 { $query: "(min-width: #{$min}) and (max-width: #{$max})"; }
-    @else if $min != 0 and $max == 0 { $query: "(min-width: #{$min})"; } 
-    @else if $min == 0 and $max != 0 { $query: "(max-width: #{$max})"; }
-    @media #{$query} { @content; }
+  } @else if $type == number {
+    $query: 'all' !default;
+    @if $min != 0 and $max != 0 {
+      $query: '(min-width: #{$min}) and (max-width: #{$max})';
+    } @else if $min != 0 and $max == 0 {
+      $query: '(min-width: #{$min})';
+    } @else if $min == 0 and $max != 0 {
+      $query: '(max-width: #{$max})';
+    }
+    @media #{$query} {
+      @content;
+    }
   }
 }
 
 @mixin breakpoint($min: 0, $max: 0) {
   $type: type-of($min);
-  
-  @if $type == string {
-    @if $min == sm { 
-      @media (max-width: 600px) { @content; }
-    }
 
-    @else if $min == md {
-      @media (min-width: 601px) { @content; } 
-    }
-    
-    @else if $min == lg {
-      @media (min-width: 1200px) { @content; } 
-    }
-  
-    @else {
+  @if $type == string {
+    @if $min == xs {
+      @media (max-width: 600px) {
+        @content;
+      }
+    } @else if $min == sm {
+      @media (min-width: 601px) {
+        @content;
+      }
+    } @else if $min == md {
+      @media (min-width: 901px) {
+        @content;
+      }
+    } @else if $min == lg {
+      @media (min-width: 1201px) {
+        @content;
+      }
+    } @else {
       @warn "The breakpoint mixin supports the following attributes: xs, sm, md, lg";
     }
-  }
-  @else if $type == number {
-    $query: "all" !default;
-    @if      $min != 0 and $max != 0 { $query: "(min-width: #{$min}) and (max-width: #{$max})"; }
-    @else if $min != 0 and $max == 0 { $query: "(min-width: #{$min})"; }
-    @else if $min == 0 and $max != 0 { $query: "(max-width: #{$max})"; }
-    @media #{$query} { @content; }
+  } @else if $type == number {
+    $query: 'all' !default;
+    @if $min != 0 and $max != 0 {
+      $query: '(min-width: #{$min}) and (max-width: #{$max})';
+    } @else if $min != 0 and $max == 0 {
+      $query: '(min-width: #{$min})';
+    } @else if $min == 0 and $max != 0 {
+      $query: '(max-width: #{$max})';
+    }
+    @media #{$query} {
+      @content;
+    }
   }
 }
 
