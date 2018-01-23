@@ -3,8 +3,8 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     //
-    // ─── SET VARIABLES ───────────────────────────────────────────────
-    //
+    // ─── FTP CONFIGURATION ───────────────────────────────────────────
+    // Set variables used in grunt-exec.
 
     projectPath: 'replacedirPath',
     ftpPathCSS: 'replaceftpPathCSS',
@@ -33,7 +33,7 @@ module.exports = function(grunt) {
 
     //
     // ─── SASS ───────────────────────────────────────────────────────
-    // Compiles and minifies scss files. Also generates a sourcemap.
+    // Compiles and minifies SCSS files. Also generates a sourcemap.
 
     sass: {
       dist: {
@@ -59,7 +59,7 @@ module.exports = function(grunt) {
 
     //
     // ─── UGLIFY ───────────────────────────────────────────
-    // Minifies javascript.
+    // Minifies JS.
 
     uglify: {
       dist: {
@@ -71,8 +71,8 @@ module.exports = function(grunt) {
 
     //
     // ─── IMPORT ──────────────────────────────────────────────────────
-    // Copies the html file to dist folder. Can also pull in external
-    // css/js file contents using '@import path/to/file'.
+    // Copies the HTML file to dist folder. Can also pull in external
+    // CSS & JS file contents using '@import path/to/file'.
 
     import: {
       options: {
@@ -117,23 +117,25 @@ module.exports = function(grunt) {
 
     //
     // ─── EXECUTE ────────────────────────────────────────────────────
-    // Executes command line script. Uploads css/js development
-    // files to ftp via cyberduck.
+    // Executes command line script. Uploads unminified CSS & JS +
+    // source maps to ftp via cyberduck.
     //
     // Homebrew installation: brew install duck
 
     exec: {
       uploadCSS: {
-        command: "duck --upload <%= ftpPathCSS %> <%= projectPath %>/dist/css/project-name.css -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y"
+        command:
+          "duck --parallel --upload <%= ftpPathCSS %> <%= projectPath %>/dist/css/project-name.css -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y && duck --parallel --upload <%= ftpPathCSS %> <%= projectPath %>/dist/css/project-name.css.map -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y"
       },
       uploadJS: {
-        command: "duck --upload <%= ftpPathJS %> <%= projectPath %>/dist/js/project-name.js -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y"
+        command:
+          "duck --parallel --upload <%= ftpPathJS %> <%= projectPath %>/dist/js/project-name.js -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y && duck --parallel --upload <%= ftpPathJS %> <%= projectPath %>/dist/js/project-name.js.map -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y"
       }
     },
 
     //
     // ─── CACHE BREAKER ──────────────────────────────────────────────────
-    // Cache busts external css/js by appending a timestamp query string
+    // Cache busts external CSS & JS by appending a timestamp query string
     // to html tag links.
 
     cachebreaker: {
