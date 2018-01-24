@@ -110,7 +110,7 @@ module.exports = function(grunt) {
         options: {
           gruntLogHeader: false,
           title: 'Grunt - project-name',
-          message: 'Build complete 👍'
+          message: 'Build complete ✅'
         }
       }
     },
