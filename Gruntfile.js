@@ -8,14 +8,26 @@ module.exports = function(grunt) {
     // automatically is using Alfred "project" workflow.
 
     directory: {
-      rootPath: 'replace-directoryPath' /* path/to/directory */,
-      jsPath: 'replace-jsPath' /* /js/main.js */,
-      cssPath: 'replace-cssPath' /* /css/main.css */
+      rootPath: '~/Dropbox/CELTICS/projects/raffle-series' /* path/to/directory */,
+      jsPath: {
+        development: 'replace-jsPath.js' /* /js/main.js */,
+        production: 'replace-jsPath.min.js' /* /js/main.min.js */
+      },
+      cssPath: {
+        development: 'replace-cssPath.css' /* /js/main.css */,
+        production: 'replace-cssPath.min.css' /* /js/main.min.css */
+      }
     },
     ftp: {
       rootPath: 'replace-ftpPath' /* ftp://ftpurl.com */,
-      jsPath: 'replace-ftpJsPath' /* /js/main.css */,
-      cssPath: 'replace-ftpCssPath' /* /css/main.css */,
+      jsPath: {
+        development: 'replace-ftpJsPath.js' /* /js/main.js */,
+        production: 'replace-ftpJsPath.min.js' /* /js/main.min.js */
+      },
+      cssPath: {
+        development: 'replace-ftpCssPath.css' /* /js/main.css */,
+        production: 'replace-ftpCssPath.min.css' /* /js/main.min.css */
+      },
       user: 'replace-ftp.user',
       pw: 'replace-ftp.pw'
     },
@@ -129,7 +141,7 @@ module.exports = function(grunt) {
     //
     // ─── EXECUTE ────────────────────────────────────────────────────
     // Executes command line script. Uploads unminified CSS & JS +
-    // CSS.map & JS.map to ftp via cyberduck.
+    // CSS.map to ftp via cyberduck.
     //
     // **** REQUIRES CYBERDUCK CLI ****
     // Homebrew installation: brew install duck
@@ -137,11 +149,15 @@ module.exports = function(grunt) {
     exec: {
       uploadCSS: {
         command:
-          "duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath %> <%= directory.rootPath %><%= directory.cssPath %> -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y && duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath %>.map <%= directory.rootPath %><%= directory.cssPath %>.map -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y"
+          "duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath.development %> <%= directory.rootPath %><%= directory.cssPath.development %> -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y && duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath.development %>.map <%= directory.rootPath %><%= directory.cssPath.development %>.map -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y"
       },
       uploadJS: {
         command:
-          "duck --parallel --upload <%= ftp.rootPath %><%= ftp.jsPath %> <%= directory.rootPath %><%= directory.jsPath %> -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y && duck --parallel --upload <%= ftp.rootPath %><%= ftp.jsPath %>.map <%= directory.rootPath %><%= directory.jsPath %>.map -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y"
+          "duck --parallel --upload <%= ftp.rootPath %><%= ftp.jsPath.development %> <%= directory.rootPath %><%= directory.jsPath.development %> -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y"
+      },
+      publish: {
+        command:
+          "duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath.production %> <%= directory.rootPath %><%= directory.cssPath.production %> -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y && duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath.production %>.map <%= directory.rootPath %><%= directory.cssPath.production %>.map -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y && duck --parallel --upload <%= ftp.rootPath %><%= ftp.jsPath.production %> <%= directory.rootPath %><%= directory.jsPath.production %> -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y"
       }
     },
 
