@@ -6,11 +6,18 @@ module.exports = function(grunt) {
     // ─── FTP CONFIGURATION ───────────────────────────────────────────
     // Set variables used in grunt-exec.
 
-    projectPath: 'replacedirPath',
-    ftpPathCSS: 'replaceftpPathCSS',
-    ftpPathJS: 'replaceftpPathJS',
-    ftpUser: 'replaceftpUser',
-    ftpPw: 'replaceftpPw',
+    directory: {
+      rootPath: 'replace-directoryPath' /* path/to/directory */,
+      jsPath: 'replace-jsPath' /* /js/main.js */,
+      cssPath: 'replace-cssPath' /* /css/main.css */
+    },
+    ftp: {
+      rootPath: 'replace-ftpPath' /* ftp://ftpurl.com */,
+      jsPath: 'replace-ftpPathJs' /* /js/main.css */,
+      cssPath: 'replace-ftpPathCss' /* /css/main.css */,
+      ftpUser: 'replace-ftpUser',
+      ftpPw: 'replace-ftpPw'
+    },
 
     //
     // ─── WATCH ──────────────────────────────────────────────────────
@@ -19,15 +26,15 @@ module.exports = function(grunt) {
     watch: {
       html: {
         files: ['src/project-name.html', 'src/html/*.html'],
-        tasks: ['import', 'notify:done']
+        tasks: ['import', 'cachebreaker', 'notify:done']
       },
       js: {
         files: ['src/js/*.js'],
-        tasks: ['browserify', 'uglify', 'exec:uploadJS', 'notify:done']
+        tasks: ['browserify', 'uglify', 'cachebreaker', 'exec:uploadJS', 'notify:done']
       },
       css: {
         files: ['src/scss/*.scss', 'src/scss/mixins/*.scss'],
-        tasks: ['sass', 'exec:uploadCSS', 'notify:done']
+        tasks: ['sass', 'exec:uploadCSS', 'cachebreaker', 'notify:done']
       }
     },
 
@@ -62,6 +69,9 @@ module.exports = function(grunt) {
     // Minifies JS.
 
     uglify: {
+      options: {
+        sourceMap: true
+      },
       dist: {
         files: {
           'dist/js/project-name.min.js': 'dist/js/project-name.js'
@@ -109,7 +119,7 @@ module.exports = function(grunt) {
       done: {
         options: {
           gruntLogHeader: false,
-          title: 'Grunt - project-name',
+          title: 'GRUNT - project-name',
           message: 'Build complete ✅'
         }
       }
@@ -118,18 +128,19 @@ module.exports = function(grunt) {
     //
     // ─── EXECUTE ────────────────────────────────────────────────────
     // Executes command line script. Uploads unminified CSS & JS +
-    // source maps to ftp via cyberduck.
+    // CSS.map & JS.map to ftp via cyberduck.
     //
+    // **** REQUIRES CYBERDUCK CLI ****
     // Homebrew installation: brew install duck
 
     exec: {
       uploadCSS: {
         command:
-          "duck --parallel --upload <%= ftpPathCSS %> <%= projectPath %>/dist/css/project-name.css -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y && duck --parallel --upload <%= ftpPathCSS %> <%= projectPath %>/dist/css/project-name.css.map -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y"
+          "duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath %> <%= directory.rootPath %>/<%= directory.cssPath %> -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y && duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath %>.map <%= directory.rootPath %>/<%= directory.cssPath %>.map -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y"
       },
       uploadJS: {
         command:
-          "duck --parallel --upload <%= ftpPathJS %> <%= projectPath %>/dist/js/project-name.js -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y && duck --parallel --upload <%= ftpPathJS %> <%= projectPath %>/dist/js/project-name.js.map -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y"
+          "duck --parallel --upload <%= ftp.rootPath %><%= ftp.jsPath %> <%= directory.rootPath %>/<%= directory.jsPath %> -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y && duck --parallel --upload <%= ftp.rootPath %><%= ftp.jsPath %>.map <%= directory.rootPath %>/<%= directory.jsPath %>.map -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y"
       }
     },
 
@@ -141,7 +152,7 @@ module.exports = function(grunt) {
     cachebreaker: {
       dev: {
         options: {
-          match: ['standings.js', 'standings.css']
+          match: ['project-name.js', 'project-name.css']
         },
         files: {
           src: ['dist/index.html']
