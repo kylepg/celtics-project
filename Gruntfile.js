@@ -4,7 +4,8 @@ module.exports = function(grunt) {
 
     //
     // ─── FTP CONFIGURATION ───────────────────────────────────────────
-    // Set variables used in grunt-exec.
+    // Set variables used in grunt-exec. These will be configured
+    // automatically is using Alfred "project" workflow.
 
     directory: {
       rootPath: 'replace-directoryPath' /* path/to/directory */,
@@ -136,11 +137,11 @@ module.exports = function(grunt) {
     exec: {
       uploadCSS: {
         command:
-          "duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath %> <%= directory.rootPath %>/<%= directory.cssPath %> -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y && duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath %>.map <%= directory.rootPath %>/<%= directory.cssPath %>.map -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y"
+          "duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath %> <%= directory.rootPath %><%= directory.cssPath %> -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y && duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath %>.map <%= directory.rootPath %><%= directory.cssPath %>.map -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y"
       },
       uploadJS: {
         command:
-          "duck --parallel --upload <%= ftp.rootPath %><%= ftp.jsPath %> <%= directory.rootPath %>/<%= directory.jsPath %> -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y && duck --parallel --upload <%= ftp.rootPath %><%= ftp.jsPath %>.map <%= directory.rootPath %>/<%= directory.jsPath %>.map -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y"
+          "duck --parallel --upload <%= ftp.rootPath %><%= ftp.jsPath %> <%= directory.rootPath %><%= directory.jsPath %> -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y && duck --parallel --upload <%= ftp.rootPath %><%= ftp.jsPath %>.map <%= directory.rootPath %><%= directory.jsPath %>.map -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y"
       }
     },
 
