@@ -16,8 +16,8 @@ module.exports = function(grunt) {
       rootPath: 'replace-ftpPath' /* ftp://ftpurl.com */,
       jsPath: 'replace-ftpJsPath' /* /js/main.css */,
       cssPath: 'replace-ftpCssPath' /* /css/main.css */,
-      ftpUser: 'replace-ftpUser',
-      ftpPw: 'replace-ftpPw'
+      ftp.user: 'replace-ftp.user',
+      ftp.pw: 'replace-ftp.pw'
     },
 
     //
@@ -137,11 +137,11 @@ module.exports = function(grunt) {
     exec: {
       uploadCSS: {
         command:
-          "duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath %> <%= directory.rootPath %><%= directory.cssPath %> -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y && duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath %>.map <%= directory.rootPath %><%= directory.cssPath %>.map -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y"
+          "duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath %> <%= directory.rootPath %><%= directory.cssPath %> -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y && duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath %>.map <%= directory.rootPath %><%= directory.cssPath %>.map -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y"
       },
       uploadJS: {
         command:
-          "duck --parallel --upload <%= ftp.rootPath %><%= ftp.jsPath %> <%= directory.rootPath %><%= directory.jsPath %> -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y && duck --parallel --upload <%= ftp.rootPath %><%= ftp.jsPath %>.map <%= directory.rootPath %><%= directory.jsPath %>.map -existing overwrite --username '<%= ftpUser %>' --password '<%= ftpPw %>' -y"
+          "duck --parallel --upload <%= ftp.rootPath %><%= ftp.jsPath %> <%= directory.rootPath %><%= directory.jsPath %> -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y && duck --parallel --upload <%= ftp.rootPath %><%= ftp.jsPath %>.map <%= directory.rootPath %><%= directory.jsPath %>.map -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y"
       }
     },
 
