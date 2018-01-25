@@ -8,8 +8,8 @@ module.exports = function(grunt) {
 
     directory: {
       rootPath: 'replace-directoryPath' /* path/to/directory */,
-      jsPath: 'replace-jsPath' /* /js/main.js */,
-      cssPath: 'replace-cssPath' /* /css/main.css */
+      jsPath: 'replace-PathJs' /* /js/main.js */,
+      cssPath: 'replace-pathCss' /* /css/main.css */
     },
     ftp: {
       rootPath: 'replace-ftpPath' /* ftp://ftpurl.com */,
