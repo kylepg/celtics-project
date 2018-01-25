@@ -8,13 +8,13 @@ module.exports = function(grunt) {
 
     directory: {
       rootPath: 'replace-directoryPath' /* path/to/directory */,
-      jsPath: 'replace-PathJs' /* /js/main.js */,
-      cssPath: 'replace-pathCss' /* /css/main.css */
+      jsPath: 'replace-jsPath' /* /js/main.js */,
+      cssPath: 'replace-cssPath' /* /css/main.css */
     },
     ftp: {
       rootPath: 'replace-ftpPath' /* ftp://ftpurl.com */,
-      jsPath: 'replace-ftpPathJs' /* /js/main.css */,
-      cssPath: 'replace-ftpPathCss' /* /css/main.css */,
+      jsPath: 'replace-ftpJsPath' /* /js/main.css */,
+      cssPath: 'replace-ftpCssPath' /* /css/main.css */,
       ftpUser: 'replace-ftpUser',
       ftpPw: 'replace-ftpPw'
     },
