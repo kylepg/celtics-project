@@ -3,7 +3,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     //
-    // ─── FTP CONFIGURATION ───────────────────────────────────────────
+    // ─── CONFIGURATION ─────────────────────────────────────────────
     // Set variables used in grunt-exec. These will be configured
     // automatically is using Alfred "project" workflow.
 
@@ -16,8 +16,8 @@ module.exports = function(grunt) {
       rootPath: 'replace-ftpPath' /* ftp://ftpurl.com */,
       jsPath: 'replace-ftpJsPath' /* /js/main.css */,
       cssPath: 'replace-ftpCssPath' /* /css/main.css */,
-      ftp.user: 'replace-ftp.user',
-      ftp.pw: 'replace-ftp.pw'
+      user: 'replace-ftp.user',
+      pw: 'replace-ftp.pw'
     },
 
     //
