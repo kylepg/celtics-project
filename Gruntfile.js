@@ -8,7 +8,7 @@ module.exports = function(grunt) {
     // automatically is using Alfred "project" workflow.
 
     directory: {
-      rootPath: '~/Dropbox/CELTICS/projects/raffle-series' /* path/to/directory */,
+      rootPath: 'replace-directoryPath' /* path/to/directory */,
       jsPath: {
         development: 'replace-jsPath.js' /* /js/main.js */,
         production: 'replace-jsPath.min.js' /* /js/main.min.js */
