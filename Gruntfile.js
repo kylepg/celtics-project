@@ -28,8 +28,8 @@ module.exports = function(grunt) {
         development: 'replace-ftpCssPath.css' /* /js/main.css */,
         production: 'replace-ftpCssPath.min.css' /* /js/main.min.css */
       },
-      user: 'replace-ftp.user',
-      pw: 'replace-ftp.pw'
+      user: 'replace-ftpUser',
+      pw: 'replace-ftpPw'
     },
 
     //
