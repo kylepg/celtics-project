@@ -11,7 +11,7 @@
 │   │   ├── <span>project-name.js</span>
 │   │   ├── <span>project-name.js.map</span>
 │   │   └── <span>project-name.min.js</span>
-│   └── <strong>index.html</strong>
+│   └── <span>index.html</span>
 │
 └── <strong>src</strong>
     ├── <strong>scss</strong>
@@ -22,5 +22,5 @@
     │   └── <span>main.scss</span>
     ├── <strong>js</strong>
     │   └── <span>main.js</span>
-    └── <strong>project-name.html</strong>
+    └── <span>project-name.html</span>
 </code></pre>
