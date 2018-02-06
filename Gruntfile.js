@@ -11,25 +11,25 @@ module.exports = function(grunt) {
       rootPath: 'replace-directoryPath' /*path/to/directory */,
       jsPath: {
         development: 'replace-jsPath.js' /*/js/main.js */,
-        production: 'replace-jsPath.min.js' /*/js/main.min.js */
+        production: 'replace-jsPath.min.js' /*/js/main.min.js */,
       },
       cssPath: {
         development: 'replace-cssPath.css' /*/js/main.css */,
-        production: 'replace-cssPath.min.css' /*/js/main.min.css */
-      }
+        production: 'replace-cssPath.min.css' /*/js/main.min.css */,
+      },
     },
     ftp: {
       rootPath: 'replace-ftpPath' /*ftp://ftpurl.com */,
       jsPath: {
         development: 'replace-ftpJsPath.js' /*/js/main.js */,
-        production: 'replace-ftpJsPath.min.js' /*/js/main.min.js */
+        production: 'replace-ftpJsPath.min.js' /*/js/main.min.js */,
       },
       cssPath: {
         development: 'replace-ftpCssPath.css' /*/js/main.css */,
-        production: 'replace-ftpCssPath.min.css' /*/js/main.min.css */
+        production: 'replace-ftpCssPath.min.css' /*/js/main.min.css */,
       },
       user: 'replace-ftpUser',
-      pw: 'replace-ftpPw'
+      pw: 'replace-ftpPw',
     },
 
     //
@@ -39,16 +39,16 @@ module.exports = function(grunt) {
     watch: {
       html: {
         files: ['src/project-name.html', 'src/html/*.html'],
-        tasks: ['import', 'cachebreaker', 'notify:done']
+        tasks: ['import', 'cachebreaker', 'notify:done'],
       },
       js: {
         files: ['src/js/*.js'],
-        tasks: ['browserify', 'uglify', 'cachebreaker', 'exec:uploadJS', 'notify:done']
+        tasks: ['browserify', 'uglify', 'cachebreaker', 'exec:uploadJS', 'notify:done'],
       },
       css: {
         files: ['src/scss/*.scss', 'src/scss/mixins/*.scss'],
-        tasks: ['sass', 'exec:uploadCSS', 'cachebreaker', 'notify:done']
-      }
+        tasks: ['sass', 'exec:uploadCSS', 'cachebreaker', 'notify:done'],
+      },
     },
 
     //
@@ -59,22 +59,22 @@ module.exports = function(grunt) {
       dist: {
         options: {
           gruntLogHeader: false,
-          sourcemap: 'auto'
+          sourcemap: 'auto',
         },
         files: {
-          'dist/css/project-name.css': 'src/scss/main.scss'
-        }
+          'dist/css/project-name.css': 'src/scss/main.scss',
+        },
       },
       min: {
         options: {
           gruntLogHeader: false,
           sourcemap: 'none',
-          style: 'compressed'
+          style: 'compressed',
         },
         files: {
-          'dist/css/project-name.min.css': 'src/scss/main.scss'
-        }
-      }
+          'dist/css/project-name.min.css': 'src/scss/main.scss',
+        },
+      },
     },
 
     //
@@ -83,13 +83,13 @@ module.exports = function(grunt) {
 
     uglify: {
       options: {
-        sourceMap: true
+        sourceMap: true,
       },
       dist: {
         files: {
-          'dist/js/project-name.min.js': 'dist/js/project-name.js'
-        }
-      }
+          'dist/js/project-name.min.js': 'dist/js/project-name.js',
+        },
+      },
     },
 
     //
@@ -99,13 +99,13 @@ module.exports = function(grunt) {
 
     import: {
       options: {
-        gruntLogHeader: false
+        gruntLogHeader: false,
       },
       dist: {
         files: {
-          'dist/index.html': 'src/project-name.html'
-        }
-      }
+          'dist/index.html': 'src/project-name.html',
+        },
+      },
     },
 
     //
@@ -119,9 +119,9 @@ module.exports = function(grunt) {
         dest: 'dist/js/project-name.js',
         options: {
           browserifyOptions: { debug: true },
-          transform: [['babelify', { presets: ['env'] }]]
-        }
-      }
+          transform: [['babelify', { presets: ['env'] }]],
+        },
+      },
     },
 
     //
@@ -133,9 +133,9 @@ module.exports = function(grunt) {
         options: {
           gruntLogHeader: false,
           title: 'GRUNT - project-name',
-          message: 'Build complete ✅'
-        }
-      }
+          message: 'Build complete ✅',
+        },
+      },
     },
 
     //
@@ -149,16 +149,16 @@ module.exports = function(grunt) {
     exec: {
       uploadCSS: {
         command:
-          "duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath.development %> <%= directory.rootPath %><%= directory.cssPath.development %> -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y && duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath.development %>.map <%= directory.rootPath %><%= directory.cssPath.development %>.map -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y"
+          "duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath.development %> <%= directory.rootPath %><%= directory.cssPath.development %> -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y && duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath.development %>.map <%= directory.rootPath %><%= directory.cssPath.development %>.map -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y",
       },
       uploadJS: {
         command:
-          "duck --parallel --upload <%= ftp.rootPath %><%= ftp.jsPath.development %> <%= directory.rootPath %><%= directory.jsPath.development %> -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y"
+          "duck --parallel --upload <%= ftp.rootPath %><%= ftp.jsPath.development %> <%= directory.rootPath %><%= directory.jsPath.development %> -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y",
       },
       publish: {
         command:
-          "duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath.production %> <%= directory.rootPath %><%= directory.cssPath.production %> -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y && duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath.production %>.map <%= directory.rootPath %><%= directory.cssPath.production %>.map -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y && duck --parallel --upload <%= ftp.rootPath %><%= ftp.jsPath.production %> <%= directory.rootPath %><%= directory.jsPath.production %> -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y"
-      }
+          "duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath.production %> <%= directory.rootPath %><%= directory.cssPath.production %> -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y && duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath.production %>.map <%= directory.rootPath %><%= directory.cssPath.production %>.map -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y && duck --parallel --upload <%= ftp.rootPath %><%= ftp.jsPath.production %> <%= directory.rootPath %><%= directory.jsPath.production %> -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y",
+      },
     },
 
     //
@@ -169,13 +169,13 @@ module.exports = function(grunt) {
     cachebreaker: {
       dev: {
         options: {
-          match: ['project-name.js', 'project-name.css']
+          match: ['project-name.js', 'project-name.css'],
         },
         files: {
-          src: ['dist/index.html']
-        }
-      }
-    }
+          src: ['dist/index.html'],
+        },
+      },
+    },
   });
 
   //

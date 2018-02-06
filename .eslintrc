@@ -17,10 +17,6 @@
         "no-var": "off",
         "no-plusplus": "off",
         "prefer-destructuring": "off",
-        "comma-dangle": [
-            "error",
-            "never"
-        ],
         "prettier/prettier": [
             "error",
             {
