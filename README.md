@@ -4,25 +4,25 @@
 │
 ├── <strong>dist</strong>
 │   ├── <strong>css</strong>
-│   │   ├── <span>project-name.css</span>
-│   │   ├── <span>project-name.css.map</span>
-│   │   └── <span>project-name.min.css</span>
+│   │   ├── project-name.css
+│   │   ├── project-name.css.map
+│   │   └── project-name.min.css
 │   ├── <strong>js</strong>
-│   │   ├── <span>project-name.js</span>
-│   │    <span>project-name.js.map</span>
-│   │   └── <span>project-name.min.js</span>
-│   └── <span>index.html</span>
+│   │   ├── project-name.js
+│   │   ├── project-name.js.map
+│   │   └── project-name.min.js
+│   └── index.html
 │
 ├── <strong>src</strong>
 │   ├── <strong>scss</strong>
 │   |   ├── <strong>mixins</strong>
-│   │   |   └──<span>_breakpoints.scss</span>
-│   │   ├── <span>_mixins.scss</span>
-│   │   ├── <span>_variables.scss</span>
-│   │   └── <span>main.scss</span>
+│   │   |   └──_breakpoints.scss
+│   │   ├── _mixins.scss
+│   │   ├── _variables.scss
+│   │   └── main.scss
 │   ├── <strong>js</strong>
-│   │   └── <span>main.js</span>
-│   └── <span>project-name.html</span>
+│   │   └── main.js
+│   └── project-name.html
 │ 
 ├── Gruntfile.js
 ├── package.json
