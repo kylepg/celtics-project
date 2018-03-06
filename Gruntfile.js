@@ -4,29 +4,29 @@ module.exports = function(grunt) {
 
     //
     //─── CONFIGURATION ─────────────────────────────────────────────
-    //Set variables used in grunt-exec. These will be configured
-    //automatically is using Alfred "project" workflow.
+    // Set variables used in grunt-exec. These will be configured
+    // automatically is using Alfred "project" workflow.
 
     directory: {
-      rootPath: 'replace-directoryPath' /*path/to/directory */,
+      rootPath: 'replace-directoryPath' /* path/to/directory */,
       jsPath: {
-        development: 'replace-jsPath.js' /*/js/main.js */,
-        production: 'replace-jsPath.min.js' /*/js/main.min.js */,
+        development: 'replace-jsPath.js' /* /js/main.js */,
+        production: 'replace-jsPath.min.js' /* /js/main.min.js */,
       },
       cssPath: {
-        development: 'replace-cssPath.css' /*/js/main.css */,
-        production: 'replace-cssPath.min.css' /*/js/main.min.css */,
+        development: 'replace-cssPath.css' /* /js/main.css */,
+        production: 'replace-cssPath.min.css' /* /js/main.min.css */,
       },
     },
     ftp: {
-      rootPath: 'replace-ftpPath' /*ftp://ftpurl.com */,
+      rootPath: 'replace-ftpPath' /* ftp://ftpurl.com */,
       jsPath: {
-        development: 'replace-ftpJsPath.js' /*/js/main.js */,
-        production: 'replace-ftpJsPath.min.js' /*/js/main.min.js */,
+        development: 'replace-ftpJsPath.js' /* /js/main.js */,
+        production: 'replace-ftpJsPath.min.js' /* /js/main.min.js */,
       },
       cssPath: {
-        development: 'replace-ftpCssPath.css' /*/js/main.css */,
-        production: 'replace-ftpCssPath.min.css' /*/js/main.min.css */,
+        development: 'replace-ftpCssPath.css' /* /js/main.css */,
+        production: 'replace-ftpCssPath.min.css' /* /js/main.min.css */,
       },
       user: 'replace-ftpUser',
       pw: 'replace-ftpPw',
@@ -34,7 +34,7 @@ module.exports = function(grunt) {
 
     //
     //─── WATCH ──────────────────────────────────────────────────────
-    //Defines tasks to be run when files are changed.
+    // Defines tasks to be run when files are changed.
 
     watch: {
       html: {
@@ -43,17 +43,17 @@ module.exports = function(grunt) {
       },
       js: {
         files: ['src/js/*.js'],
-        tasks: ['browserify', 'uglify', 'cachebreaker', 'exec:uploadJS', 'notify:done'],
+        tasks: ['browserify', 'uglify', 'cachebreaker' /* 'exec:uploadJS' */, 'notify:done'],
       },
       css: {
         files: ['src/scss/*.scss', 'src/scss/mixins/*.scss'],
-        tasks: ['sass', 'exec:uploadCSS', 'cachebreaker', 'notify:done'],
+        tasks: ['sass' /* 'exec:uploadCSS' */, 'cachebreaker', 'notify:done'],
       },
     },
 
     //
     //─── SASS ───────────────────────────────────────────────────────
-    //Compiles and minifies SCSS files. Also generates a sourcemap.
+    // Compiles and minifies SCSS files. Also generates a sourcemap.
 
     sass: {
       dist: {
@@ -79,7 +79,7 @@ module.exports = function(grunt) {
 
     //
     //─── UGLIFY ───────────────────────────────────────────
-    //Minifies JS.
+    // Minifies JS.
 
     uglify: {
       options: {
@@ -94,8 +94,8 @@ module.exports = function(grunt) {
 
     //
     //─── IMPORT ──────────────────────────────────────────────────────
-    //Copies the HTML file to dist folder. Can also pull in external
-    //CSS & JS file contents using '@import path/to/file'.
+    // Copies the HTML file to dist folder. Can also pull in external
+    // CSS & JS file contents using '@import path/to/file'.
 
     import: {
       options: {
@@ -110,8 +110,8 @@ module.exports = function(grunt) {
 
     //
     //─── BROWSERIFY ────────────────────────────────────────────
-    //Allows use of node's require method to bundle node-modules.
-    //Compiles ES6+ to ES5 using Babel.
+    // Allows use of node's require method to bundle node-modules.
+    // Also compiles ES6+ to ES5 using Babel.
 
     browserify: {
       dev: {
@@ -126,7 +126,7 @@ module.exports = function(grunt) {
 
     //
     //─── NOTIFY ───────────────────────────────────────────
-    //Notifies you when all tasks have completed.
+    // Notifies you when all tasks have completed.
 
     notify: {
       done: {
@@ -140,11 +140,11 @@ module.exports = function(grunt) {
 
     //
     //─── EXECUTE ────────────────────────────────────────────────────
-    //Executes command line script. Uploads unminified CSS & JS +
-    //CSS.map to ftp via cyberduck.
+    // Executes command line script. Uploads unminified CSS & JS +
+    // CSS.map to ftp via cyberduck.
     //
-    //**** REQUIRES CYBERDUCK CLI ****
-    //Homebrew installation: brew install duck
+    // **** REQUIRES CYBERDUCK CLI ****
+    // Homebrew installation: brew install duck
 
     exec: {
       uploadCSS: {
@@ -163,8 +163,8 @@ module.exports = function(grunt) {
 
     //
     //─── CACHE BREAKER ──────────────────────────────────────────────────
-    //Cache busts external CSS & JS by appending a timestamp query string
-    //to html tag links.
+    // Cache busts external CSS & JS by appending a timestamp query string
+    // to html tag links.
 
     cachebreaker: {
       dev: {
@@ -180,7 +180,7 @@ module.exports = function(grunt) {
 
   //
   //─── LOAD TASKS ────────────────────────────────────────────────────────────────────
-  //Load grunt tasks from node_modules.
+  // Load grunt tasks from node_modules.
 
   require('grunt-log-headers')(grunt); //OPTIONAL: Hides grunt task from logging in terminal.
   grunt.loadNpmTasks('grunt-contrib-watch');

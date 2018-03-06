@@ -4,12 +4,10 @@
         "prettier"
     ],
     "rules": {
+        "no-console": 0,
         "func-names": 0,
         "wrap-iife": 0,
-        "spaced-comment": [
-            "error",
-            "never"
-        ],
+        "spaced-comment": 0,
         "space-before-function-paren": [
             "error",
             "never"
