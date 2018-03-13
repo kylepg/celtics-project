@@ -8,13 +8,11 @@
 │
 ├── <strong>dist</strong>
 │   ├── <strong>css</strong>
-│   │   ├── project-name.css
-│   │   ├── project-name.css.map
-│   │   └── project-name.min.css
+│   │   ├── project-name.min.css
+│   │   └── project-name.min.css.map
 │   ├── <strong>js</strong>
-│   │   ├── project-name.js
-│   │   ├── project-name.js.map
-│   │   └── project-name.min.js
+│   │   ├── project-name.min.js
+│   │   └── project-name.min.js.map
 │   └── index.html
 │
 ├── <strong>src</strong>
