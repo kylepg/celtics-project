@@ -19,15 +19,17 @@
 │   ├── <strong>scss</strong>
 │   |   ├── <strong>mixins</strong>
 │   │   |   └──_breakpoints.scss
-│   │   ├── _mixins.scss
 │   │   ├── _variables.scss
 │   │   └── main.scss
 │   ├── <strong>js</strong>
 │   │   └── main.js
 │   └── project-name.html
 │ 
+├──.eslintrc
+├──.eslintignore
+├──.gitignore
 ├── Gruntfile.js
-├── package.json
-└── README.md
+├── README.md
+└── package.json
 
 </code></pre>
