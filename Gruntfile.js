@@ -3,36 +3,6 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     //
-    //─── CONFIGURATION ─────────────────────────────────────────────
-    // Set variables used in grunt-exec. These will be configured
-    // automatically is using Alfred "project" workflow.
-
-    directory: {
-      rootPath: 'replace-directoryPath' /* path/to/directory */,
-      jsPath: {
-        development: 'replace-jsPath.js' /* /js/main.js */,
-        production: 'replace-jsPath.min.js' /* /js/main.min.js */,
-      },
-      cssPath: {
-        development: 'replace-cssPath.css' /* /js/main.css */,
-        production: 'replace-cssPath.min.css' /* /js/main.min.css */,
-      },
-    },
-    ftp: {
-      rootPath: 'replace-ftpPath' /* ftp://ftpurl.com */,
-      jsPath: {
-        development: 'replace-ftpJsPath.js' /* /js/main.js */,
-        production: 'replace-ftpJsPath.min.js' /* /js/main.min.js */,
-      },
-      cssPath: {
-        development: 'replace-ftpCssPath.css' /* /js/main.css */,
-        production: 'replace-ftpCssPath.min.css' /* /js/main.min.css */,
-      },
-      user: 'replace-ftpUser',
-      pw: 'replace-ftpPw',
-    },
-
-    //
     //─── WATCH ──────────────────────────────────────────────────────
     // Defines tasks to be run when files are changed.
 
@@ -43,11 +13,11 @@ module.exports = function(grunt) {
       },
       js: {
         files: ['src/js/*.js'],
-        tasks: ['browserify', 'uglify', 'cachebreaker' /* 'exec:uploadJS' */, 'notify:done'],
+        tasks: ['browserify', 'cachebreaker', 'notify:done'],
       },
       css: {
         files: ['src/scss/*.scss', 'src/scss/mixins/*.scss'],
-        tasks: ['sass' /* 'exec:uploadCSS' */, 'cachebreaker', 'notify:done'],
+        tasks: ['sass', 'cachebreaker', 'notify:done'],
       },
     },
 
@@ -56,19 +26,10 @@ module.exports = function(grunt) {
     // Compiles and minifies SCSS files. Also generates a sourcemap.
 
     sass: {
-      dist: {
-        options: {
-          gruntLogHeader: false,
-          sourcemap: 'auto',
-        },
-        files: {
-          'dist/css/project-name.css': 'src/scss/main.scss',
-        },
-      },
       min: {
         options: {
           gruntLogHeader: false,
-          sourcemap: 'none',
+          sourcemap: true,
           style: 'compressed',
         },
         files: {
@@ -116,10 +77,10 @@ module.exports = function(grunt) {
     browserify: {
       dev: {
         src: ['src/js/main.js'],
-        dest: 'dist/js/project-name.js',
+        dest: 'dist/js/project-name.min.js',
         options: {
           browserifyOptions: { debug: true },
-          transform: [['babelify', { presets: ['env'] }]],
+          transform: [['babelify', { presets: ['env'] }], 'uglifyify'],
         },
       },
     },
@@ -135,29 +96,6 @@ module.exports = function(grunt) {
           title: 'GRUNT - project-name',
           message: 'Build complete ✅',
         },
-      },
-    },
-
-    //
-    //─── EXECUTE ────────────────────────────────────────────────────
-    // Executes command line script. Uploads unminified CSS & JS +
-    // CSS.map to ftp via cyberduck.
-    //
-    // **** REQUIRES CYBERDUCK CLI ****
-    // Homebrew installation: brew install duck
-
-    exec: {
-      uploadCSS: {
-        command:
-          "duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath.development %> <%= directory.rootPath %><%= directory.cssPath.development %> -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y && duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath.development %>.map <%= directory.rootPath %><%= directory.cssPath.development %>.map -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y",
-      },
-      uploadJS: {
-        command:
-          "duck --parallel --upload <%= ftp.rootPath %><%= ftp.jsPath.development %> <%= directory.rootPath %><%= directory.jsPath.development %> -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y",
-      },
-      publish: {
-        command:
-          "duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath.production %> <%= directory.rootPath %><%= directory.cssPath.production %> -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y && duck --parallel --upload <%= ftp.rootPath %><%= ftp.cssPath.production %>.map <%= directory.rootPath %><%= directory.cssPath.production %>.map -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y && duck --parallel --upload <%= ftp.rootPath %><%= ftp.jsPath.production %> <%= directory.rootPath %><%= directory.jsPath.production %> -existing overwrite --username '<%= ftp.user %>' --password '<%= ftp.pw %>' -y",
       },
     },
 
@@ -187,7 +125,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-import');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-cache-breaker');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-notify');
   grunt.loadNpmTasks('grunt-exec');
   grunt.loadNpmTasks('grunt-browserify');
