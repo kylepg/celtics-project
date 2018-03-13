@@ -28,27 +28,10 @@ module.exports = function(grunt) {
     sass: {
       min: {
         options: {
-          gruntLogHeader: false,
-          sourcemap: true,
           style: 'compressed',
         },
         files: {
           'dist/css/project-name.min.css': 'src/scss/main.scss',
-        },
-      },
-    },
-
-    //
-    //─── UGLIFY ───────────────────────────────────────────
-    // Minifies JS.
-
-    uglify: {
-      options: {
-        sourceMap: true,
-      },
-      dist: {
-        files: {
-          'dist/js/project-name.min.js': 'dist/js/project-name.js',
         },
       },
     },
@@ -59,9 +42,6 @@ module.exports = function(grunt) {
     // CSS & JS file contents using '@import path/to/file'.
 
     import: {
-      options: {
-        gruntLogHeader: false,
-      },
       dist: {
         files: {
           'dist/index.html': 'src/project-name.html',
@@ -119,14 +99,12 @@ module.exports = function(grunt) {
   //
   //─── LOAD TASKS ────────────────────────────────────────────────────────────────────
   // Load grunt tasks from node_modules.
-
-  require('grunt-log-headers')(grunt); //OPTIONAL: Hides grunt task from logging in terminal.
+  require('grunt-log-headers')(grunt);
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-import');
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-cache-breaker');
   grunt.loadNpmTasks('grunt-notify');
-  grunt.loadNpmTasks('grunt-exec');
-  grunt.loadNpmTasks('grunt-browserify');
   grunt.registerTask('default', ['watch']);
 };

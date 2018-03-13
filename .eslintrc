@@ -15,6 +15,7 @@
         "no-var": "off",
         "no-plusplus": "off",
         "prefer-destructuring": "off",
+        "global-require": "off",
         "prettier/prettier": [
             "error",
             {
