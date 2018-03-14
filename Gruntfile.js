@@ -13,11 +13,11 @@ module.exports = function(grunt) {
       },
       js: {
         files: ['src/js/*.js'],
-        tasks: ['browserify', 'cachebreaker', 'notify:done'],
+        tasks: ['newer:browserify', 'notify:done'],
       },
       css: {
         files: ['src/scss/*.scss', 'src/scss/mixins/*.scss'],
-        tasks: ['sass', 'cachebreaker', 'notify:done'],
+        tasks: ['newer:sass', 'notify:done'],
       },
     },
 
@@ -28,6 +28,7 @@ module.exports = function(grunt) {
     sass: {
       min: {
         options: {
+          gruntLogHeader: false,
           style: 'compressed',
         },
         files: {
@@ -59,6 +60,7 @@ module.exports = function(grunt) {
         src: ['src/js/main.js'],
         dest: 'dist/js/project-name.min.js',
         options: {
+          gruntLogHeader: false,
           browserifyOptions: { debug: true },
           transform: [['babelify', { presets: ['env'] }], 'uglifyify'],
         },
@@ -87,7 +89,7 @@ module.exports = function(grunt) {
     cachebreaker: {
       dev: {
         options: {
-          match: ['project-name.js', 'project-name.css'],
+          match: ['project-name.min.js', 'project-name.min.css'],
         },
         files: {
           src: ['dist/index.html'],
@@ -106,5 +108,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-cache-breaker');
   grunt.loadNpmTasks('grunt-notify');
+  grunt.loadNpmTasks('grunt-newer');
   grunt.registerTask('default', ['watch']);
 };
