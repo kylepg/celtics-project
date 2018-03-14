@@ -9,8 +9,7 @@
 │   │   ├── project-name.min.css
 │   │   └── project-name.min.css.map
 │   ├── <strong>js</strong>
-│   │   ├── project-name.min.js
-│   │   └── project-name.min.js.map
+│   │   └── project-name.min.js
 │   └── index.html
 │
 ├── <strong>src</strong>
