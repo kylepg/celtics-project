@@ -21,6 +21,7 @@
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.5.1",
     "grunt": "^1.0.1",
+    "grunt-babel": "^7.0.0",
     "grunt-browserify": "^5.2.0",
     "grunt-cache-breaker": "^2.0.1",
     "grunt-cli": "^1.2.0",

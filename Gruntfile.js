@@ -13,7 +13,7 @@ module.exports = function(grunt) {
       },
       js: {
         files: ['src/js/*.js'],
-        tasks: ['newer:browserify', 'notify:done'],
+        tasks: ['newer:babel', /*'newer:browserify',*/ 'notify:done'],
       },
       css: {
         files: ['src/scss/*.scss', 'src/scss/mixins/*.scss'],
@@ -63,6 +63,23 @@ module.exports = function(grunt) {
           gruntLogHeader: false,
           browserifyOptions: { debug: true },
           transform: [['babelify', { presets: ['env'] }], 'uglifyify'],
+        },
+      },
+    },
+
+    //
+    //─── BABEL ──────────────────────────────────────────────────
+    // Compile ES6+ to ES5
+
+    babel: {
+      options: {
+        sourceMap: true,
+        presets: ['env'],
+        minified: true,
+      },
+      dist: {
+        files: {
+          'dist/js/project-name.min.js': 'src/js/main.js',
         },
       },
     },
