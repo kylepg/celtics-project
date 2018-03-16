@@ -73,7 +73,7 @@ module.exports = function(grunt) {
 
     babel: {
       options: {
-        sourceMap: true,
+        sourceMap: 'inline',
         presets: ['env'],
         minified: true,
       },
@@ -123,6 +123,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-import');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-babel');
   grunt.loadNpmTasks('grunt-cache-breaker');
   grunt.loadNpmTasks('grunt-notify');
   grunt.loadNpmTasks('grunt-newer');
