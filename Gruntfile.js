@@ -92,8 +92,8 @@ module.exports = function(grunt) {
       done: {
         options: {
           gruntLogHeader: false,
-          title: 'GRUNT - project-name',
-          message: 'Build complete ✅',
+          title: 'project-name - grunt',
+          message: 'tasks complete ✅✅✅✅✅',
         },
       },
     },
