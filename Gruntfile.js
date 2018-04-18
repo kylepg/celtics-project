@@ -62,7 +62,24 @@ module.exports = function(grunt) {
         options: {
           gruntLogHeader: false,
           browserifyOptions: { debug: true },
-          transform: [['babelify', { presets: ['env'] }], 'uglifyify'],
+          transform: [
+            [
+              'babelify',
+              {
+                presets: ['env'],
+                plugins: [
+                  [
+                    'transform-runtime',
+                    {
+                      polyfill: false,
+                      regenerator: true,
+                    },
+                  ],
+                ],
+              },
+            ],
+            'uglifyify',
+          ],
         },
       },
     },
@@ -93,7 +110,7 @@ module.exports = function(grunt) {
         options: {
           gruntLogHeader: false,
           title: 'project-name - grunt',
-          message: 'tasks complete ✅✅✅✅✅',
+          message: 'build complete ✅✅✅',
         },
       },
     },
@@ -106,7 +123,7 @@ module.exports = function(grunt) {
     cachebreaker: {
       dev: {
         options: {
-          match: ['project-name.min.js', 'project-name.min.css'],
+          match: ['app_content-channel.min.js', 'app_content-channel.min.css'],
         },
         files: {
           src: ['dist/index.html'],
