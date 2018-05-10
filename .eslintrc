@@ -8,10 +8,7 @@
         "func-names": 0,
         "wrap-iife": 0,
         "spaced-comment": 0,
-        "space-before-function-paren": [
-            "error",
-            "never"
-        ],
+        "space-before-function-paren": "off",
         "no-var": "off",
         "no-plusplus": "off",
         "prefer-destructuring": "off",
