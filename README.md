@@ -19,7 +19,10 @@
 │   │   ├── _variables.scss
 │   │   └── main.scss
 │   ├── <strong>js</strong>
+│   │   ├── <strong>modules</strong>
 │   │   └── main.js
+│   ├── <strong>templates</strong>
+│   │   └── template.jsx
 │   └── project-name.html
 │ 
 ├──.eslintrc
