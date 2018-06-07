@@ -13,7 +13,7 @@ module.exports = function(grunt) {
       },
       js: {
         files: ['src/js/*.js'],
-        tasks: ['newer:babel', /*'newer:browserify',*/ 'notify:done'],
+        tasks: ['newer:browserify', /*'newer:babel',*/ 'notify:done'],
       },
       css: {
         files: ['src/scss/*.scss', 'src/scss/mixins/*.scss'],
@@ -28,7 +28,6 @@ module.exports = function(grunt) {
     sass: {
       min: {
         options: {
-          gruntLogHeader: false,
           style: 'compressed',
         },
         files: {
@@ -60,7 +59,6 @@ module.exports = function(grunt) {
         src: ['src/js/main.js'],
         dest: 'dist/js/project-name.min.js',
         options: {
-          gruntLogHeader: false,
           browserifyOptions: { debug: true },
           transform: [
             [
@@ -91,7 +89,16 @@ module.exports = function(grunt) {
     babel: {
       options: {
         sourceMap: 'inline',
-        presets: ['env'],
+        presets: [
+          [
+            'env',
+            {
+              targets: {
+                node: 'current',
+              },
+            },
+          ],
+        ],
         minified: true,
       },
       dist: {
@@ -108,7 +115,6 @@ module.exports = function(grunt) {
     notify: {
       done: {
         options: {
-          gruntLogHeader: false,
           title: 'project-name - grunt',
           message: 'build complete ✅✅✅',
         },
@@ -135,7 +141,6 @@ module.exports = function(grunt) {
   //
   //─── LOAD TASKS ────────────────────────────────────────────────────────────────────
   // Load grunt tasks from node_modules.
-  require('grunt-log-headers')(grunt);
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-import');
   grunt.loadNpmTasks('grunt-contrib-sass');

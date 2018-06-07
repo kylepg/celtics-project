@@ -12,6 +12,7 @@
         "no-var": "off",
         "no-plusplus": "off",
         "prefer-destructuring": "off",
+        "import/extensions": 0,
         "global-require": "off",
         "prettier/prettier": [
             "error",
